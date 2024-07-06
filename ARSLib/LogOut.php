@@ -135,16 +135,6 @@
 </head>
 <body>
 
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="search-container">
-            <input type="text" placeholder="Temukan...">
-            <button type="submit">🔍</button>
-        </div>
-        <a href="login.php">Masuk</a>
-        <a href="Daftar.php">Daftar</a>
-    </div>
-
     <button class="openbtn" onclick="openNav()">☰</button>
 
     <div class="container">
