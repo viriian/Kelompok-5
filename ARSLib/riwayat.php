@@ -191,16 +191,23 @@
 </head>
 <body>
 
-    <div id="mySidebar" class="sidebar">
+
+<div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="search-container">
-            <input type="text" placeholder="Temukan...">
-            <button type="submit">🔍</button>
+        <input type="text" placeholder="Temukan...">
+        <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
         </div>
         <a href="homepage.php">Beranda</a>
         <a href="profil.php">Profil</a>
         <a href="logout.php">Keluar</a>
     </div>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Temukan...">
+            <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
+        </div>
 
     <button class="openbtn" onclick="openNav()">☰</button>
 
