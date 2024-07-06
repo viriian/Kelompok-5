@@ -154,18 +154,26 @@
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="search-container">
-            <input type="text" placeholder="Temukan...">
-            <button type="submit">🔍</button>
+        <input type="text" placeholder="Temukan...">
+        <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
         </div>
         <a href="homepage.php">Beranda</a>
         <a href="profil.php">Profil</a>
         <a href="logout.php">Keluar</a>
     </div>
 
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="Temukan...">
+            <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
+        </div>
+
     <button class="openbtn" onclick="openNav()">☰</button>
+    </head>
+<body>
 
     <div class="container">
-        <h1>Cari</h1>
+        <h1>Cari Buku</h1>
         <div class="form-container">
             <div>
                 <label for="judul">Judul</label>
@@ -183,9 +191,31 @@
                 <label for="program_studi">Program Studi</label>
                 <input type="text" id="program_studi" name="program_studi">
             </div>
-            <button type="submit">Temukan</button>
+            <input type="text" placeholder="Temukan...">
+            <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
         </div>
     </div>
+
+    <script>
+        function redirectToSearchResults() {
+            const judul = document.getElementById('judul').value;
+            const penulis = document.getElementById('penulis').value;
+            const subjek = document.getElementById('subjek').value;
+            const programStudi = document.getElementById('program_studi').value;
+
+            // Simpan data input ke dalam URL
+            const searchParams = new URLSearchParams({
+                judul,
+                penulis,
+                subjek,
+                programStudi
+            });
+
+            // Redirect ke halaman hasil pencarian dengan parameter
+            window.location.href = `hasil_pencarian.html?${searchParams.toString()}`;
+        }
+    </script>
+</body>
 
     <script>
         function openNav() {
