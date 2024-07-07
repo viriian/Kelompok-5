@@ -22,7 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         move_uploaded_file($_FILES['picture']['tmp_name'], 'uploads/' . $_FILES['picture']['name']);
     }
 
-    header('Location: profile.php');
+    // Pesan sukses
+    $_SESSION['message'] = 'Data berhasil tersimpan';
+
+    header('Location: Profil.php');
     exit();
 }
 
@@ -115,6 +118,10 @@ $profileData = $_SESSION['profileData'];
 
 <div class="container">
     <h1>Edit Profil Anggota</h1>
+    <?php if (isset($_SESSION['message'])): ?>
+        <p style="color: green;"><?php echo $_SESSION['message']; ?></p>
+        <?php unset($_SESSION['message']); ?>
+    <?php endif; ?>
     <form id="edit-profile-form" method="POST" enctype="multipart/form-data">
         <div class="form-group profile-picture">
             <img id="preview-picture" src="<?php echo $profileData['picture']; ?>" alt="Foto Profil">
