@@ -235,8 +235,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="AdminHomepage.php">Beranda</a>
+        <a href="admin_members.php">Data Anggota</a>
         <a href="AdminLibrary.php">Admin Library</a>
-        <a href="Perpustakaan.php">Perpustakaan</a>
+        <a href="perpustakaan.php">Perpustakaan</a>
+        <a href="dashboard_admin.php">Dashboard Admin</a>
         <a href="logout.php">Keluar</a>
     </div>
 
