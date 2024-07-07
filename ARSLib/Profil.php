@@ -85,18 +85,21 @@ $profileData = $_SESSION['profileData'];
             font-weight: bold;
         }
 
-        .profile-sidebar button {
+        .profile-sidebar .profile-buttons {
+            margin-top: 20px;
+        }
+
+        .profile-sidebar .profile-buttons button {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
             background-color: #333;
             color: white;
             cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
+            margin-right: 10px;
         }
 
-        .profile-sidebar button:hover {
+        .profile-sidebar .profile-buttons button:hover {
             background-color: #444;
         }
 
@@ -108,6 +111,28 @@ $profileData = $_SESSION['profileData'];
             font-size: 22px;
             margin-bottom: 10px;
             text-align: center;
+        }
+
+        .profile-content .button-wrapper {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-content .button-wrapper a {
+            text-decoration: none;
+        }
+
+        .profile-content .button-wrapper button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .profile-content .button-wrapper button:hover {
+            background-color: #444;
         }
 
         table {
@@ -164,112 +189,16 @@ $profileData = $_SESSION['profileData'];
             <p><span>Kelas:</span> <?php echo $profileData['class']; ?></p>
             <p><span>Program Studi:</span> <?php echo $profileData['programStudy']; ?></p>
             <p><span>Fakultas:</span> <?php echo $profileData['faculty']; ?></p>
-            <p><span>Nama Kampus:</span> <?php echo $profileData['university']; ?></p>
+            <p><span>Universitas:</span> <?php echo $profileData['university']; ?></p>
             <p><span>Tanggal Lahir:</span> <?php echo $profileData['birthdate']; ?></p>
             <p><span>Alamat:</span> <?php echo $profileData['address']; ?></p>
         </div>
-        <button onclick="showEditProfile()">Edit Profil</button>
-    </div>
-    <div class="profile-content">
-        <h2>Riwayat Baca Buku</h2>
-        <table>
-            <tr>
-                <th>Judul Buku</th>
-                <th>Tanggal</th>
-                <th>Status</th>
-                <th>Deskripsi</th>
-            </tr>
-            <tr>
-                <td>Judul Buku 1</td>
-                <td>01-01-2024</td>
-                <td>Selesai</td>
-                <td>Deskripsi buku 1</td>
-            </tr>
-            <tr>
-                <td>Judul Buku 2</td>
-                <td>05-01-2024</td>
-                <td>Belum Selesai</td>
-                <td>Deskripsi buku 2</td>
-            </tr>
-            <!-- Tambahkan baris sesuai kebutuhan -->
-        </table>
-        <div class="pagination">
-            <button>&lt;</button>
-            <button>&gt;</button>
+        <div class="profile-buttons">
+            <a href="EditProfil.php"><button>Edit Profil</button></a>
+            <a href="riwayat.php"><button>Riwayat Peminjaman Buku</button></a>
         </div>
     </div>
 </div>
-
-<script>
-    function showEditProfile() {
-        const editProfileForm = `
-            <div class="container">
-                <h1>Edit Profil Anggota</h1>
-                <form id="edit-profile-form" method="POST" enctype="multipart/form-data" action="edit_profile.php">
-                    <div class="form-group profile-picture">
-                        <img id="preview-picture" src="<?php echo $profileData['picture']; ?>" alt="Foto Profil">
-                    </div>
-                    <div class="form-group">
-                        <label for="picture">Foto Profil</label>
-                        <input type="file" id="picture" name="picture" accept="image/*">
-                    </div>
-                    <div class="form-group">
-                        <label for="fullname">Nama Lengkap</label>
-                        <input type="text" id="fullname" name="fullname" value="<?php echo $profileData['fullname']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" value="<?php echo $profileData['username']; ?>" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="libraryId">Nomor Anggota Perpustakaan</label>
-                        <input type="text" id="libraryId" name="libraryId" value="<?php echo $profileData['libraryId']; ?>" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="nim">NIM</label>
-                        <input type="text" id="nim" name="nim" value="<?php echo $profileData['nim']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="class">Kelas</label>
-                        <input type="text" id="class" name="class" value="<?php echo $profileData['class']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="programStudy">Program Studi</label>
-                        <input type="text" id="programStudy" name="programStudy" value="<?php echo $profileData['programStudy']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="faculty">Fakultas</label>
-                        <input type="text" id="faculty" name="faculty" value="<?php echo $profileData['faculty']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="university">Nama Kampus</label>
-                        <input type="text" id="university" name="university" value="<?php echo $profileData['university']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="birthdate">Tanggal Lahir</label>
-                        <input type="date" id="birthdate" name="birthdate" value="<?php echo $profileData['birthdate']; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Alamat</label>
-                        <textarea id="address" name="address"><?php echo $profileData['address']; ?></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit">Simpan</button>
-                    </div>
-                </form>
-            </div>
-        `;
-        document.body.innerHTML = editProfileForm;
-
-        document.getElementById("picture").addEventListener("change", function(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                document.getElementById("preview-picture").src = reader.result;
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        });
-    }
-</script>
 
 </body>
 </html>
