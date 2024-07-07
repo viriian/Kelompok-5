@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page with Sidebar</title>
+    <title>Login Page</title>
     <style>
         body {
             display: flex;
@@ -21,29 +21,13 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             display: flex;
-        }
-
-        .illustration {
-            padding: 0px;
-            display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background-color: #f9f9f9;
-        }
-
-        .illustration img {
-            max-width: 100%;
-            height: auto;
-            object-fit : contain; 
-        }
-
-        .login-form {
             padding: 30px;
-            width: 300px;
         }
 
-        .login-form h2 {
+        .container h2 {
             margin-bottom: 20px;
             color: #333;
         }
@@ -88,129 +72,27 @@
             font-weight: bold;
             margin-bottom: 20px;
         }
-
-        /* Sidebar styles */
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: white;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-            border-right: 1px solid #ccc;
-        }
-
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 22px;
-            color: black;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 36px;
-        }
-
-        .openbtn {
-            font-size: 30px;
-            cursor: pointer;
-            /*background-color: #333;*/
-            color: black;
-            padding: 10px 15px;
-            border: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-        }
-
-        .openbtn:hover {
-            background-color: #444;
-        }
-
-        .search-container {
-            padding: 10px 15px;
-        }
-
-        .search-container input {
-            width: 80%;
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .search-container button {
-            padding: 10px;
-            border: none;
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .search-container button:hover {
-            background-color: #444;
-        }
     </style>
 </head>
 <body>
 
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="search-container">
-            <input type="text" placeholder="Temukan...">
-            <button type="submit">🔍</button>
+<div class="container">
+    <div class="header">Selamat Datang!</div>
+    <h2>Login</h2>
+    <form action="homepage.php" method="POST" class="login-form">
+        <input type="text" placeholder="Masukan Username" required>
+        <input type="password" placeholder="Masukan Password" required>
+        <div>
+            <input type="checkbox" id="remember">
+            <label for="remember">Ingat saya</label>
+            <a href="#" style="float: right;margin : 10px;">Lupa Password?</a>
         </div>
-        <a href="login.php">Masuk</a>
-        <a href="Daftar.php">Daftar</a>
-    </div>
-
-    <button class="openbtn" onclick="openNav()">☰</button>
-
-    <div class="container">
-        <div class="illustration">
-            <img src="ARSLib Planning/2(1).png" alt="Illustration">
+        <button type="submit">Login</button>
+        <div class="link">
+            Belum punya Akun? <a href="Daftar.php">Sign Up</a>
         </div>
-        <div class="login-form">
-            <div class="header">Selamat Datang!</div>
-            <h2>Login</h2>
-            <form action="homepage.php" method="POST">
-            <input type="text" placeholder="Masukan Username" required>
-            <input type="password" placeholder="Masukan Password" required>
-            <div >
-                <input type="checkbox" id="remember">
-                <label for="remember">Ingat saya</label>
-                <a href="#" style="float: right;margin : 10px;">Lupa Password?</a>
-            </div>
-            <button type="submit">Login</button>
-            <div class="link">
-                Belum punya Akun? <a href="Daftar.php">Sign Up</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "250px";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-        }
-    </script>
+    </form>
+</div>
 
 </body>
 </html>
