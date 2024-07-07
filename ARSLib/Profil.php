@@ -1,94 +1,88 @@
+<?php
+session_start();
+
+// Jika data belum ada di sesi, buat data default
+if (!isset($_SESSION['profileData'])) {
+    $_SESSION['profileData'] = [
+        'picture' => 'profile_picture_placeholder.png',
+        'fullname' => 'Nama Lengkap',
+        'username' => 'username_auto_increment',
+        'libraryId' => 'P12345',
+        'nim' => '1234567890',
+        'class' => 'A1',
+        'programStudy' => 'Teknik Informatika',
+        'faculty' => 'Fakultas Teknik',
+        'university' => 'Universitas Contoh',
+        'birthdate' => '2000-01-01',
+        'address' => 'Jl. Contoh No. 123'
+    ];
+}
+
+$profileData = $_SESSION['profileData'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Pengguna</title>
+    <title>Profil Anggota</title>
     <style>
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
             background-color: #e0e0e0;
+            overflow-y: auto;
         }
 
         .container {
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
             padding: 30px;
-            width: 900px;
-            display: flex;
+            width: 600px;
+            margin: 20px;
         }
 
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: white;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-            border-right: 1px solid #ccc;
+        .profile-header {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 22px;
-            color: black;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 36px;
-        }
-
-        .openbtn {
-            font-size: 20px;
-            cursor: pointer;
-            background-color: #333;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-        }
-
-        .openbtn:hover {
-            background-color: #444;
+        .profile-header h1 {
+            font-size: 28px;
+            margin: 0;
         }
 
         .profile-sidebar {
-            width: 250px;
             text-align: center;
-            padding: 20px;
-            border-right: 1px solid #ccc;
+            margin-bottom: 20px;
         }
 
         .profile-sidebar img {
-            width: 100%;
+            display: block;
+            margin: 0 auto 10px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
         }
 
-        .profile-sidebar h2 {
-            margin: 20px auto;
+        .profile-sidebar .profile-info {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .profile-sidebar .profile-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .profile-sidebar .profile-info span {
+            font-weight: bold;
         }
 
         .profile-sidebar button {
@@ -98,6 +92,8 @@
             background-color: #333;
             color: white;
             cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
         }
 
         .profile-sidebar button:hover {
@@ -105,45 +101,19 @@
         }
 
         .profile-content {
-            flex-grow: 1;
-            padding: 20px;
+            width: 100%;
         }
 
-        .profile-content h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid #ccc;
-            margin-bottom: 20px;
-        }
-
-        .tabs button {
-            padding: 10px 20px;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .tabs button.active {
-            border-bottom: 3px solid black;
-            font-weight: bold;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
+        .profile-content h2 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            text-align: center;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
 
         table, th, td {
@@ -161,7 +131,7 @@
 
         .pagination {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             margin-top: 20px;
         }
 
@@ -170,6 +140,7 @@
             border: 1px solid #ccc;
             background-color: white;
             cursor: pointer;
+            margin: 0 5px;
         }
 
         .pagination button:hover {
@@ -179,114 +150,126 @@
 </head>
 <body>
 
-<div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="search-container">
-        <input type="text" placeholder="Temukan...">
-        <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
-        </div>
-        <a href="homepage.php">Beranda</a>
-        <a href="profil.php">Profil</a>
-        <a href="logout.php">Keluar</a>
+<div class="container">
+    <div class="profile-header">
+        <h1>PROFILE ANGGOTA</h1>
     </div>
-
-    <div class="container">
-        <div class="search-bar">
-            <input type="text" placeholder="Temukan...">
-            <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
+    <div class="profile-sidebar">
+        <img id="profile-picture" src="<?php echo $profileData['picture']; ?>" alt="Foto Profil">
+        <div class="profile-info">
+            <p><span>Nama Lengkap:</span> <?php echo $profileData['fullname']; ?></p>
+            <p><span>Username:</span> <?php echo $profileData['username']; ?></p>
+            <p><span>Nomor Anggota Perpustakaan:</span> <?php echo $profileData['libraryId']; ?></p>
+            <p><span>NIM:</span> <?php echo $profileData['nim']; ?></p>
+            <p><span>Kelas:</span> <?php echo $profileData['class']; ?></p>
+            <p><span>Program Studi:</span> <?php echo $profileData['programStudy']; ?></p>
+            <p><span>Fakultas:</span> <?php echo $profileData['faculty']; ?></p>
+            <p><span>Nama Kampus:</span> <?php echo $profileData['university']; ?></p>
+            <p><span>Tanggal Lahir:</span> <?php echo $profileData['birthdate']; ?></p>
+            <p><span>Alamat:</span> <?php echo $profileData['address']; ?></p>
         </div>
-
-    <button class="openbtn" onclick="openNav()">☰</button>
-
-    <div class="container">
-        <div class="profile-sidebar">
-            <img src="profile_picture_placeholder.png" alt="Foto Profil">
-            <h2>Nama</h2>
-            <p id="books-read">Telah membaca 0 Buku</p>
-            <button onclick="window.location.href='Logout.php'">Keluar</button>
-        </div>
-        <div class="profile-content">
-            <h1>Profil</h1>
-            <div class="tabs">
-                <button class="tab-link active" onclick="openTab(event, 'sekarang')">Sekarang</button>
-                <button class="tab-link" onclick="openTab(event, 'riwayat')">Riwayat</button>
-            </div>
-            <div id="sekarang" class="tab-content active">
-                <table>
-                    <tr>
-                        <th>Judul Buku</th>
-                        <th>Tanggal</th>
-                        <th>Status</th>
-                        <th>Deskripsi</th>
-                    </tr>
-                    <tr>
-                        <td>Judul Buku</td>
-                        <td>Tanggal</td>
-                        <td>Status</td>
-                        <td>Deskripsi</td>
-                    </tr>
-                    <!-- Tambahkan baris sesuai kebutuhan -->
-                </table>
-            </div>
-            <div id="riwayat" class="tab-content">
-                <table>
-                    <tr>
-                        <th>Judul Buku</th>
-                        <th>Tanggal</th>
-                        <th>Status</th>
-                        <th>Deskripsi</th>
-                    </tr>
-                    <tr>
-                        <td>Judul Buku</td>
-                        <td>Tanggal</td>
-                        <td>Status</td>
-                        <td>Deskripsi</td>
-                    </tr>
-                    <!-- Tambahkan baris sesuai kebutuhan -->
-                </table>
-            </div>
-            <div class="pagination">
-                <button>&lt;</button>
-                <button>&gt;</button>
-            </div>
+        <button onclick="showEditProfile()">Edit Profil</button>
+    </div>
+    <div class="profile-content">
+        <h2>Riwayat Baca Buku</h2>
+        <table>
+            <tr>
+                <th>Judul Buku</th>
+                <th>Tanggal</th>
+                <th>Status</th>
+                <th>Deskripsi</th>
+            </tr>
+            <tr>
+                <td>Judul Buku 1</td>
+                <td>01-01-2024</td>
+                <td>Selesai</td>
+                <td>Deskripsi buku 1</td>
+            </tr>
+            <tr>
+                <td>Judul Buku 2</td>
+                <td>05-01-2024</td>
+                <td>Belum Selesai</td>
+                <td>Deskripsi buku 2</td>
+            </tr>
+            <!-- Tambahkan baris sesuai kebutuhan -->
+        </table>
+        <div class="pagination">
+            <button>&lt;</button>
+            <button>&gt;</button>
         </div>
     </div>
+</div>
 
-    <script>
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "250px";
-        }
+<script>
+    function showEditProfile() {
+        const editProfileForm = `
+            <div class="container">
+                <h1>Edit Profil Anggota</h1>
+                <form id="edit-profile-form" method="POST" enctype="multipart/form-data" action="edit_profile.php">
+                    <div class="form-group profile-picture">
+                        <img id="preview-picture" src="<?php echo $profileData['picture']; ?>" alt="Foto Profil">
+                    </div>
+                    <div class="form-group">
+                        <label for="picture">Foto Profil</label>
+                        <input type="file" id="picture" name="picture" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Nama Lengkap</label>
+                        <input type="text" id="fullname" name="fullname" value="<?php echo $profileData['fullname']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" value="<?php echo $profileData['username']; ?>" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="libraryId">Nomor Anggota Perpustakaan</label>
+                        <input type="text" id="libraryId" name="libraryId" value="<?php echo $profileData['libraryId']; ?>" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="nim">NIM</label>
+                        <input type="text" id="nim" name="nim" value="<?php echo $profileData['nim']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="class">Kelas</label>
+                        <input type="text" id="class" name="class" value="<?php echo $profileData['class']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="programStudy">Program Studi</label>
+                        <input type="text" id="programStudy" name="programStudy" value="<?php echo $profileData['programStudy']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="faculty">Fakultas</label>
+                        <input type="text" id="faculty" name="faculty" value="<?php echo $profileData['faculty']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="university">Nama Kampus</label>
+                        <input type="text" id="university" name="university" value="<?php echo $profileData['university']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="birthdate">Tanggal Lahir</label>
+                        <input type="date" id="birthdate" name="birthdate" value="<?php echo $profileData['birthdate']; ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Alamat</label>
+                        <textarea id="address" name="address"><?php echo $profileData['address']; ?></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        `;
+        document.body.innerHTML = editProfileForm;
 
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-        }
-
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
+        document.getElementById("picture").addEventListener("change", function(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                document.getElementById("preview-picture").src = reader.result;
             }
-            tablinks = document.getElementsByClassName("tab-link");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
-        // Tampilkan tab "Sekarang" secara default
-        document.getElementById("sekarang").style.display = "block";
-
-        // Function to update the number of books read
-        function updateBooksRead() {
-            var booksRead = 130; // Replace with dynamic value
-            document.getElementById("books-read").innerText = "Telah membaca " + booksRead + " Buku";
-        }
-
-        // Call the function to update the books read
-        updateBooksRead();
-    </script>
+            reader.readAsDataURL(event.target.files[0]);
+        });
+    }
+</script>
 
 </body>
 </html>
