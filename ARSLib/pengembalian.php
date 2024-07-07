@@ -1,14 +1,19 @@
 <?php
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $id_buku = $_POST['id_buku'];
-    foreach ($_SESSION['peminjaman'] as $key => $peminjaman) {
-        if ($peminjaman['id'] == $id_buku) {
-            unset($_SESSION['peminjaman'][$key]);
-        }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['action']) && $_POST['action'] === 'return') {
+        $id_buku = $_POST['id_buku'];
+
+        // Simulasi pengembalian buku
+        $_SESSION['return_status'] = [
+            'id' => $id_buku,
+            'status' => 'returned'
+        ];
     }
 }
 
-header("Location: perpustakaan.php");
+// Redirect kembali ke halaman perpustakaan
+header('Location: perpustakaan.php');
 exit();
+?>
