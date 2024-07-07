@@ -140,7 +140,7 @@
     <div class="container">
         <h1>Keluar</h1>
         <p>Terima kasih telah menggunakan laman kami</p>
-        <button onclick="window.location.href='login.php'">Kembali</button>
+        <button onclick="window.location.href='Index.php'">Kembali</button>
         <p>Sampai jumpa lagi!</p>
     </div>
 
