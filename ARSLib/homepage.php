@@ -28,20 +28,21 @@
         }
 
         .search-bar input[type="text"] {
-            width: calc(100% - 40px);
-            padding: 10px;
+            width: calc(100% - 80px);
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 5px;
             margin-right: 10px;
         }
 
         .search-bar button {
-            padding: 10px 20px;
+            padding: 8px 15px;
             border: none;
             background-color: #333;
             color: white;
             cursor: pointer;
             border-radius: 5px;
+            font-size: 14px;
         }
 
         .search-bar button:hover {
@@ -86,10 +87,11 @@
         }
 
         .card button {
-            padding: 10px 15px;
+            padding: 8px 12px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
         }
 
         .card button.available {
@@ -158,8 +160,8 @@
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="search-container">
-            <input type="text" placeholder="Temukan...">
-            <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
+            <input type="text" id="sidebarSearchInput" placeholder="Temukan...">
+            <button type="submit" onclick="searchBooksSidebar()">🔍</button>
         </div>
         <a href="homepage.php">Beranda</a>
         <a href="profil.php">Profil</a>
@@ -170,10 +172,10 @@
     <div class="container">
         <h1>Library Homepage</h1>
         <div class="search-bar">
-            <input type="text" placeholder="Temukan...">
-            <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
+            <input type="text" id="searchInput" placeholder="Temukan...">
+            <button type="submit" onclick="searchBooks()">🔍</button>
         </div>
-        <div class="results">
+        <div class="results" id="results">
             <!-- Example book cards -->
             <div class="card">
                 <img src="sampul_buku_placeholder.png" alt="Sampul Buku">
@@ -205,6 +207,32 @@
 
         function redirectToPeminjaman(url) {
             window.location.href = url;
+        }
+
+        function searchBooks() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                if (title.includes(input) || input === "") {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+
+        function searchBooksSidebar() {
+            let input = document.getElementById('sidebarSearchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                if (title.includes(input) || input === "") {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
         }
     </script>
 </body>
