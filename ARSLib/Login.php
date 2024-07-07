@@ -24,7 +24,7 @@
         }
 
         .illustration {
-            padding: 30px;
+            padding: 0px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,6 +35,7 @@
         .illustration img {
             max-width: 100%;
             height: auto;
+            object-fit : contain; 
         }
 
         .login-form {
@@ -124,10 +125,10 @@
         }
 
         .openbtn {
-            font-size: 20px;
+            font-size: 30px;
             cursor: pointer;
-            background-color: #333;
-            color: white;
+            /*background-color: #333;*/
+            color: black;
             padding: 10px 15px;
             border: none;
             position: fixed;
@@ -181,21 +182,22 @@
 
     <div class="container">
         <div class="illustration">
-            <img src="path_to_your_image.png" alt="Illustration">
+            <img src="ARSLib Planning/2(1).png" alt="Illustration">
         </div>
         <div class="login-form">
             <div class="header">Selamat Datang!</div>
-            <h2>Masuk</h2>
+            <h2>Login</h2>
+            <form action="homepage.php" method="POST">
             <input type="text" placeholder="Masukan Username" required>
             <input type="password" placeholder="Masukan Password" required>
-            <div>
+            <div >
                 <input type="checkbox" id="remember">
                 <label for="remember">Ingat saya</label>
-                <a href="#" style="float: right;">Lupa Password?</a>
+                <a href="#" style="float: right;margin : 10px;">Lupa Password?</a>
             </div>
             <button type="submit">Login</button>
             <div class="link">
-                Belum punya Akun? <a href="Daftar.php">Daftar</a>
+                Belum punya Akun? <a href="Daftar.php">Sign Up</a>
             </div>
         </div>
     </div>

@@ -24,7 +24,7 @@
         }
 
         .illustration {
-            padding: 30px;
+            padding: 0px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -33,12 +33,14 @@
         }
 
         .illustration img {
-            max-width: 100%;
+            max-width: 90%;
             height: auto;
+            object-fit : contain;
+            
         }
 
         .signup-form {
-            padding: 30px;
+            padding: 50px;
             width: 300px;
         }
 
@@ -120,10 +122,10 @@
         }
 
         .openbtn {
-            font-size: 20px;
+            font-size: 30px;
             cursor: pointer;
-            background-color: #333;
-            color: white;
+            /*background-color: #333;*/
+            color: black;
             padding: 10px 15px;
             border: none;
             position: fixed;
@@ -177,17 +179,18 @@
 
     <div class="container">
         <div class="illustration">
-            <img src="path_to_your_image.png" alt="Illustration">
+            <img src="ARSLib Planning/2(1).png" alt="Illustration">
         </div>
         <div class="signup-form">
             <div class="header">Selamat Datang!</div>
-            <h2>Daftar</h2>
+            <h2>Sign Up</h2>
+            <form action="login.php" method="POST">
             <input type="email" placeholder="Masukan email" required>
             <input type="text" placeholder="Masukan username" required>
             <input type="password" placeholder="Masukan Password" required>
-            <button type="submit">Daftar</button>
+            <button type="submit">Sign Up</button>
             <div class="link">
-                Sudah punya akun? <a href="login.php">Masuk</a>
+                Sudah punya akun? <a href="login.php">Login</a>
             </div>
         </div>
     </div>
