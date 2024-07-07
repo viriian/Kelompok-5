@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Homepage</title>
     <style>
+        /* CSS */
         body {
             display: flex;
             justify-content: center;
@@ -22,81 +23,85 @@
             overflow: hidden;
             padding: 50px;
             text-align: center;
-            width: 600px;
+            width: 80%;
+            margin: 20px auto;
         }
 
-        .container h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
+        .search-bar input[type="text"] {
+            width: calc(100% - 40px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
         }
 
-        .container p {
-            margin-bottom: 40px;
-        }
-
-        .container button {
+        .search-bar button {
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
             background-color: #333;
             color: white;
-            font-size: 16px;
             cursor: pointer;
+            border-radius: 5px;
         }
 
-        .container button:hover {
+        .search-bar button:hover {
             background-color: #444;
         }
 
-        .header {
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .search-container {
-            padding: 10px 15px;
-            margin-bottom: 20px;
-        }
-
-        .search-container input {
-            width: 60%;
-            padding: 10px;
-            margin-right: 10px;
+        .card {
+            width: calc(30% - 20px);
+            background-color: #fff;
             border: 1px solid #ccc;
             border-radius: 5px;
-        }
-
-        .search-container button {
+            margin-bottom: 20px;
+            text-align: center;
             padding: 10px;
-            border: none;
-            background-color: #333;
-            color: white;
             cursor: pointer;
-            border-radius: 5px;
+            transition: transform 0.2s;
+            margin-right: 20px;
         }
 
-        .search-container button:hover {
-            background-color: #444;
+        .card:last-child {
+            margin-right: 0;
         }
 
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .card:hover {
+            transform: scale(1.05);
         }
 
-        .form-container div {
-            margin-bottom: 15px;
-        }
-
-        .form-container input {
+        .card img {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            height: 200px;
+            background-color: #e0e0e0;
+            margin-bottom: 10px;
         }
 
-        /* Sidebar styles */
+        .card h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .card button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .card button.available {
+            background-color: #000;
+            color: white;
+        }
+
+        .card button.borrowed {
+            background-color: #888;
+            color: white;
+        }
+
         .sidebar {
             height: 100%;
             width: 0;
@@ -146,76 +151,48 @@
         .openbtn:hover {
             background-color: #444;
         }
-
     </style>
 </head>
 <body>
-
+    <!-- Sidebar -->
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="search-container">
-        <input type="text" placeholder="Temukan...">
-        <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
+            <input type="text" placeholder="Temukan...">
+            <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
         </div>
         <a href="homepage.php">Beranda</a>
         <a href="profil.php">Profil</a>
+        <a href="perpustakaan.php">Perpustakaan</a>
         <a href="logout.php">Keluar</a>
     </div>
 
     <div class="container">
+        <h1>Library Homepage</h1>
         <div class="search-bar">
             <input type="text" placeholder="Temukan...">
             <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
         </div>
-
-    <button class="openbtn" onclick="openNav()">☰</button>
-    </head>
-<body>
-
-    <div class="container">
-        <h1>Cari Buku</h1>
-        <div class="form-container">
-            <div>
-                <label for="judul">Judul</label>
-                <input type="text" id="judul" name="judul">
+        <div class="results">
+            <!-- Example book cards -->
+            <div class="card">
+                <img src="sampul_buku_placeholder.png" alt="Sampul Buku">
+                <h3>Judul Buku 1</h3>
+                <p>Penulis Buku 1</p>
+                <p>Status: Tersedia</p>
+                <button class="available" onclick="redirectToPeminjaman('peminjaman.php?id=1&judul=Judul Buku 1&penulis=Penulis Buku 1&deskripsi=Deskripsi Buku 1')">Pinjam</button>
             </div>
-            <div>
-                <label for="penulis">Penulis</label>
-                <input type="text" id="penulis" name="penulis">
+            <div class="card">
+                <img src="sampul_buku_placeholder.png" alt="Sampul Buku">
+                <h3>Judul Buku 2</h3>
+                <p>Penulis Buku 2</p>
+                <p>Status: Tersedia</p>
+                <button class="available" onclick="redirectToPeminjaman('peminjaman.php?id=2&judul=Judul Buku 2&penulis=Penulis Buku 2&deskripsi=Deskripsi Buku 2')">Pinjam</button>
             </div>
-            <div>
-                <label for="subjek">Subjek</label>
-                <input type="text" id="subjek" name="subjek">
-            </div>
-            <div>
-                <label for="program_studi">Program Studi</label>
-                <input type="text" id="program_studi" name="program_studi">
-            </div>
-            <input type="text" placeholder="Temukan...">
-            <button type="submit" onclick="window.location.href = 'cari.php'">🔍</button>
         </div>
     </div>
 
-    <script>
-        function redirectToSearchResults() {
-            const judul = document.getElementById('judul').value;
-            const penulis = document.getElementById('penulis').value;
-            const subjek = document.getElementById('subjek').value;
-            const programStudi = document.getElementById('program_studi').value;
-
-            // Simpan data input ke dalam URL
-            const searchParams = new URLSearchParams({
-                judul,
-                penulis,
-                subjek,
-                programStudi
-            });
-
-            // Redirect ke halaman hasil pencarian dengan parameter
-            window.location.href = `hasil_pencarian.html?${searchParams.toString()}`;
-        }
-    </script>
-</body>
+    <button class="openbtn" onclick="openNav()">☰</button>
 
     <script>
         function openNav() {
@@ -225,7 +202,10 @@
         function closeNav() {
             document.getElementById("mySidebar").style.width = "0";
         }
-    </script>
 
+        function redirectToPeminjaman(url) {
+            window.location.href = url;
+        }
+    </script>
 </body>
 </html>
