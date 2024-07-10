@@ -147,6 +147,5 @@ $availableBooks = $totalBooks - $borrowedBooks;  // Sisa buku yang tersedia
         }
     });
 </script>
-
 </body>
 </html>
