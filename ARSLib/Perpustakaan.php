@@ -4,9 +4,9 @@ session_start();
 // Inisialisasi atau simulasi data jika belum ada
 if (!isset($_SESSION['books'])) {
     $_SESSION['books'] = [
-        ['id' => 1, 'judul' => 'Buku A', 'penulis' => 'Penulis A', 'deskripsi' => 'Deskripsi Buku A', 'gambar' => 'buku_a.jpg', 'rating' => 0, 'reviews' => []],
-        ['id' => 2, 'judul' => 'Buku B', 'penulis' => 'Penulis B', 'deskripsi' => 'Deskripsi Buku B', 'gambar' => 'buku_b.jpg', 'rating' => 0, 'reviews' => []],
-        ['id' => 3, 'judul' => 'Buku C', 'penulis' => 'Penulis C', 'deskripsi' => 'Deskripsi Buku C', 'gambar' => 'buku_c.jpg', 'rating' => 0, 'reviews' => []]
+        ['id' => 1, 'judul' => 'Buku A', 'penulis' => 'Penulis A', 'gambar' => 'buku_a.jpg', 'rating' => 0, 'reviews' => []],
+        ['id' => 2, 'judul' => 'Buku B', 'penulis' => 'Penulis B', 'gambar' => 'buku_b.jpg', 'rating' => 0, 'reviews' => []],
+        ['id' => 3, 'judul' => 'Buku C', 'penulis' => 'Penulis C', 'gambar' => 'buku_c.jpg', 'rating' => 0, 'reviews' => []]
         // Tambahkan buku lainnya sesuai kebutuhan
     ];
 }
@@ -196,7 +196,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="book-info">
                             <h2><?php echo $book['judul']; ?></h2>
                             <p><strong>Penulis:</strong> <?php echo $book['penulis']; ?></p>
-                            <p><?php echo $book['deskripsi']; ?></p>
                             <div class="book-actions">
                                 <!-- Form untuk memberi rating -->
                                 <form method="POST" action="perpustakaan.php" class="rating-form">
