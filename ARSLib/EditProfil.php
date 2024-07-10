@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
 
+
 $profileData = $_SESSION['profileData'];
 ?>
 
