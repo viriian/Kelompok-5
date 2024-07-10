@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $gambar_path = '';
     $pdf_path = '';
 
-    // Handle file uploads
     if (isset($_FILES['gambar']) && $_FILES['gambar']['size'] > 0) {
         $gambar = $_FILES['gambar'];
         $target_dir = "uploads/";
