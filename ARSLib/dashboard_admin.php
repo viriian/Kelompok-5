@@ -5,7 +5,6 @@ session_start();
 $totalBooks = 100;  // Total buku di perpustakaan
 $borrowedBooks = 25;  // Buku yang sedang dipinjam
 $availableBooks = $totalBooks - $borrowedBooks;  // Sisa buku yang tersedia
-
 ?>
 
 <!DOCTYPE html>
@@ -16,75 +15,7 @@ $availableBooks = $totalBooks - $borrowedBooks;  // Sisa buku yang tersedia
     <title>Dashboard Admin</title>
     <!-- Load Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ccc;
-        }
-
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #f0f0f0;
-        }
-
-        .chart-container {
-            margin-top: 20px;
-            height: 300px;
-            width: 100%;
-            max-width: 800px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .button-container button {
-            padding: 10px 20px;
-            border: none;
-            background-color: #333;
-            color: #fff;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        .button-container button:hover {
-            background-color: #444;
-        }
-    </style>
+    <link rel="stylesheet" href="dashboard_admin.css">
 </head>
 <body>
 
@@ -147,5 +78,6 @@ $availableBooks = $totalBooks - $borrowedBooks;  // Sisa buku yang tersedia
         }
     });
 </script>
+
 </body>
 </html>
