@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login Page</title>
+    <link rel="stylesheet" href="AdminLogin.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">Selamat Datang, Admin!</div>
+    <h2>Masuk</h2>
+    <form action="AdminLogin.php" method="POST" class="login-form">
+        <input type="text" name="username" placeholder="Masukan Username" required>
+        <input type="password" name="password" placeholder="Masukan Password" required>
+        <div>
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Ingat saya</label>
+            <a href="#" style="float: right;">Lupa Password?</a>
+        </div>
+        <button type="submit">Login</button>
+        <div class="link">
+            Belum punya Akun? <a href="AdminDaftar.html">Daftar</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
