@@ -1,239 +1,74 @@
+<?php
+session_start(); // Mulai session jika belum dimulai
+
+// Contoh data buku (biasanya ini akan diambil dari database)
+$books = [
+    [
+        'id' => 1,
+        'title' => 'Title Book 1',
+        'author' => 'Author Book 1',
+        'description' => 'Description Book 1',
+        'status' => 'available'
+    ],
+    [
+        'id' => 2,
+        'title' => 'Title Book 2',
+        'author' => 'Author Book 2',
+        'description' => 'Description Book 2',
+        'status' => 'available'
+    ]
+];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Homepage</title>
-    <style>
-        /* CSS */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            padding: 50px;
-            text-align: center;
-            width: 80%;
-            margin: 20px auto;
-        }
-
-        .search-bar input[type="text"] {
-            width: calc(100% - 80px);
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        .search-bar button {
-            padding: 8px 15px;
-            border: none;
-            background-color: #333;
-            color: white;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .search-bar button:hover {
-            background-color: #444;
-        }
-
-        .card {
-            width: calc(30% - 20px);
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            text-align: center;
-            padding: 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            margin-right: 20px;
-        }
-
-        .card:last-child {
-            margin-right: 0;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-        }
-
-        .card img {
-            width: 100%;
-            height: 200px;
-            background-color: #e0e0e0;
-            margin-bottom: 10px;
-        }
-
-        .card h3 {
-            font-size: 18px;
-            margin: 10px 0;
-        }
-
-        .card p {
-            margin: 5px 0;
-        }
-
-        .card button {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .card button.available {
-            background-color: #000;
-            color: white;
-        }
-
-        .card button.borrowed {
-            background-color: #888;
-            color: white;
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            left: 0;
-            background-color: white;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-            border-right: 1px solid #ccc;
-        }
-
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 22px;
-            color: black;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 36px;
-        }
-
-        .openbtn {
-            font-size: 20px;
-            cursor: pointer;
-            background-color: #333;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            position: fixed;
-            top: 20px;
-            left: 20px;
-        }
-
-        .openbtn:hover {
-            background-color: #444;
-        }
-    </style>
+    <link rel="stylesheet" href="homepage.css">
 </head>
 <body>
     <!-- Sidebar -->
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div class="search-container">
-            <input type="text" id="sidebarSearchInput" placeholder="Temukan...">
+            <input type="text" id="sidebarSearchInput" placeholder="Search..">
             <button type="submit" onclick="searchBooksSidebar()">🔍</button>
+            <a href="homepage.php">Home</a>
+            <a href="profile.php">Profile</a>
+            <a href="library.php">Library</a>
+            <a href="logout.php">Logout</a>
         </div>
-        <a href="homepage.php">Beranda</a>
-        <a href="profil.php">Profil</a>
-        <a href="perpustakaan.php">Perpustakaan</a>
-        <a href="logout.php">Keluar</a>
     </div>
 
     <div class="container">
         <h1>Library Homepage</h1>
         <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Temukan...">
+            <input type="text" id="searchInput" placeholder="Search...">
             <button type="submit" onclick="searchBooks()">🔍</button>
         </div>
         <div class="results" id="results">
-            <!-- Example book cards -->
+            <?php foreach ($books as $book): ?>
             <div class="card">
-                <img src="sampul_buku_placeholder.png" alt="Sampul Buku">
-                <h3>Judul Buku 1</h3>
-                <p>Penulis Buku 1</p>
-                <p>Status: Tersedia</p>
-                <button class="available" onclick="redirectToPeminjaman('peminjaman.php?id=1&judul=Judul Buku 1&penulis=Penulis Buku 1&deskripsi=Deskripsi Buku 1')">Pinjam</button>
+                <img src="book_cover_placeholder.png" alt="Book Cover">
+                <h3><?php echo $book['title']; ?></h3>
+                <p><?php echo $book['author']; ?></p>
+                <p>Status: <?php echo ucfirst($book['status']); ?></p>
+                <?php if ($book['status'] == 'available'): ?>
+                <button class="available" onclick="redirectToBorrow('borrow.php?id=<?php echo $book['id']; ?>&title=<?php echo urlencode($book['title']); ?>&author=<?php echo urlencode($book['author']); ?>&description=<?php echo urlencode($book['description']); ?>')">Borrow</button>
+                <?php else: ?>
+                <button class="borrowed" disabled>Borrowed</button>
+                <?php endif; ?>
             </div>
-            <div class="card">
-                <img src="sampul_buku_placeholder.png" alt="Sampul Buku">
-                <h3>Judul Buku 2</h3>
-                <p>Penulis Buku 2</p>
-                <p>Status: Tersedia</p>
-                <button class="available" onclick="redirectToPeminjaman('peminjaman.php?id=2&judul=Judul Buku 2&penulis=Penulis Buku 2&deskripsi=Deskripsi Buku 2')">Pinjam</button>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
     <button class="openbtn" onclick="openNav()">☰</button>
 
-    <script>
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "250px";
-        }
+    <script src="homepage.js"></script>
 
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-        }
-
-        function redirectToPeminjaman(url) {
-            window.location.href = url;
-        }
-
-        function searchBooks() {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card');
-            for (let i = 0; i < cards.length; i++) {
-                let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-                if (title.includes(input) || input === "") {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
-        }
-
-        function searchBooksSidebar() {
-            let input = document.getElementById('sidebarSearchInput').value.toLowerCase();
-            let cards = document.getElementsByClassName('card');
-            for (let i = 0; i < cards.length; i++) {
-                let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
-                if (title.includes(input) || input === "") {
-                    cards[i].style.display = "";
-                } else {
-                    cards[i].style.display = "none";
-                }
-            }
-        }
-    </script>
 </body>
 </html>
