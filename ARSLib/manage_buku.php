@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $gambar_path = '';
     $pdf_path = '';
 
+    // Handle file uploads
     if (isset($_FILES['gambar']) && $_FILES['gambar']['size'] > 0) {
         $gambar = $_FILES['gambar'];
         $target_dir = "uploads/";
@@ -39,29 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'pdf' => $pdf_path
         ];
         $current_data[] = $book_details;
-    } elseif ($action == 'update') {
-        // Update book details
-        foreach ($current_data as &$book) {
-            if ($book['id'] == $id_buku) {
-                $book['judul'] = $judul;
-                $book['penulis'] = $penulis;
-                $book['deskripsi'] = $deskripsi;
-                if ($gambar_path) $book['gambar'] = $gambar_path;
-                if ($pdf_path) $book['pdf'] = $pdf_path;
-                break;
-            }
-        }
-    } elseif ($action == 'delete') {
-        // Delete book
-        $current_data = array_filter($current_data, function ($book) use ($id_buku) {
-            return $book['id'] !== $id_buku;
-        });
     }
 
     file_put_contents($file, json_encode($current_data, JSON_PRETTY_PRINT));
 
-    // Redirect to the library page
-    header('Location: Perpustakaan.php');
+    // Redirect to the manage books page
+    header('Location: manage_buku.html');
     exit;
 }
 ?>
