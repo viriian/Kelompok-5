@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="Login.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="header">Selamat Datang!</div>
+    <h2>Login</h2>
+    <form action="homepage.php" method="POST" class="login-form">
+        <input type="text" placeholder="Masukkan Username" required>
+        <input type="password" placeholder="Masukkan Password" required>
+        <div>
+            <input type="checkbox" id="remember">
+            <label for="remember">Ingat saya</label>
+            <a href="#" style="float: right;margin : 10px;">Lupa Password?</a>
+        </div>
+        <button type="submit">Login</button>
+        <div class="link">
+            Belum punya Akun? <a href="Daftar.php">Sign Up</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
