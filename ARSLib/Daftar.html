@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daftar</title>
+    <link rel="stylesheet" href="Daftar.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Daftar</h1>
+      <form action="Daftar.php" method="post" class="form-container">
+        <div>
+          <label for="nama_lengkap">Nama Lengkap</label>
+          <input type="text" id="nama_lengkap" name="nama_lengkap" required />
+        </div>
+        <div>
+          <label for="nim">NIM</label>
+          <input type="text" id="nim" name="nim" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" required />
+        </div>
+        <div>
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div class="form-action">
+          <button type="submit">Daftar</button>
+          <a href="Login.php">Sudah punya akun? Masuk di sini</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
