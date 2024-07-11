@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Library</title>
+    <link rel="stylesheet" href="AdminLibrary.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Admin Library</h1>
+      <div class="books-container">
+        <?php foreach ($books as $book): ?>
+        <div class="book">
+          <?php if ($book['gambar']): ?>
+          <img src="<?php echo $book['gambar']; ?>" alt="Book Cover" />
+          <?php endif; ?>
+          <div class="book-info">
+            <h2><?php echo $book['judul']; ?></h2>
+            <p>
+              <strong>ID Buku:</strong>
+              <?php echo $book['id']; ?>
+            </p>
+            <p>
+              <strong>Penulis:</strong>
+              <?php echo $book['penulis']; ?>
+            </p>
+            <p><?php echo $book['deskripsi']; ?></p>
+          </div>
+          <div class="book-actions">
+            <form
+              method="POST"
+              action="AdminHomepage.php"
+              style="display: inline"
+            >
+              <input
+                type="hidden"
+                name="id_buku"
+                value="<?php echo $book['id']; ?>"
+              />
+              <button type="submit">Edit</button>
+            </form>
+            <form
+              method="POST"
+              action="AdminLibrary.php"
+              style="display: inline"
+            >
+              <input
+                type="hidden"
+                name="id_buku"
+                value="<?php echo $book['id']; ?>"
+              />
+              <input type="hidden" name="action" value="delete" />
+              <button type="submit" class="delete">Hapus</button>
+            </form>
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </body>
+</html>
