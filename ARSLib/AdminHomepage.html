@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Homepage</title>
+    <link rel="stylesheet" href="AdminHomepage.css" />
+  </head>
+  <body>
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
+      <a href="AdminHomepage.html">Beranda</a>
+      <a href="admin_members.html">Data Anggota</a>
+      <a href="AdminLibrary.html">Admin Library</a>
+      <a href="perpustakaan.html">Perpustakaan</a>
+      <a href="dashboard_admin.html">Dashboard Admin</a>
+      <a href="logout.html">Keluar</a>
+    </div>
+
+    <button class="openbtn" onclick="openNav()">☰</button>
+
+    <div class="container">
+      <h1>Admin Library</h1>
+      <form
+        action="AdminHomepage.php"
+        method="post"
+        enctype="multipart/form-data"
+        class="form-container"
+      >
+        <div>
+          <label for="id_buku">ID Buku</label>
+          <input type="text" id="id_buku" name="id_buku" />
+        </div>
+        <div>
+          <label for="judul">Judul Buku</label>
+          <input type="text" id="judul" name="judul" />
+        </div>
+        <div>
+          <label for="penulis">Penulis</label>
+          <input type="text" id="penulis" name="penulis" />
+        </div>
+        <div>
+          <label for="deskripsi">Deskripsi</label>
+          <textarea id="deskripsi" name="deskripsi" rows="4"></textarea>
+        </div>
+        <div>
+          <label for="gambar">Upload Gambar</label>
+          <input type="file" id="gambar" name="gambar" accept="image/*" />
+        </div>
+        <div>
+          <label for="pdf">Upload PDF</label>
+          <input type="file" id="pdf" name="pdf" accept=".pdf" />
+        </div>
+        <div class="form-action">
+          <button type="submit" name="action" value="upload">
+            Upload Buku
+          </button>
+        </div>
+      </form>
+      <?php if (isset($_SESSION['message']) && $_SESSION['success']): ?>
+      <div class="form-container upload-success">
+        <div class="icon">&#10004;</div>
+        <p><?php echo $_SESSION['message']; ?></p>
+      </div>
+      <?php unset($_SESSION['message']); ?>
+      <?php unset($_SESSION['success']); ?>
+      <?php endif; ?>
+    </div>
+
+    <script>
+      function openNav() {
+        document.getElementById("mySidebar").style.width = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidebar").style.width = "0";
+      }
+    </script>
+  </body>
+</html>
