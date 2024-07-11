@@ -1,0 +1,127 @@
+/* CSS untuk tampilan perpustakaan */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 50px;
+  width: 80%;
+  margin: 20px auto;
+}
+
+.container h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.books-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.book {
+  width: 400px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  text-align: left;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.book img {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.book-info {
+  flex: 1;
+}
+
+.book h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.book p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.book-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.rating-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rating-form select {
+  display: none; /* Hide the actual select element */
+}
+
+.rating-form .stars {
+  display: flex;
+  align-items: center;
+}
+
+.rating-form .stars label {
+  font-size: 24px;
+  color: #ddd; /* Grey color for empty star */
+  cursor: pointer;
+}
+
+.rating-form .stars label:hover,
+.rating-form .stars label:hover ~ label,
+.rating-form .stars input:checked ~ label {
+  color: gold; /* Gold color for filled star */
+}
+
+.rating-form .stars input {
+  display: none; /* Hide radio inputs */
+}
+
+.rating-form textarea {
+  padding: 5px;
+  font-size: 14px;
+  margin-top: 10px;
+  resize: vertical;
+}
+
+.rating-form button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.rating-form button:hover {
+  background-color: #444;
+}
