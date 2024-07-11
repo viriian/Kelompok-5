@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perpustakaan</title>
+    <link rel="stylesheet" href="perpustakaan.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Perpustakaan</h1>
+      <div class="books-container">
+        <!-- PHP Code Start -->
+        <?php foreach ($_SESSION['books'] as $book): ?>
+        <div class="book">
+          <div style="display: flex">
+            <?php if ($book['gambar']): ?>
+            <img src="<?php echo $book['gambar']; ?>" alt="Book Cover" />
+            <?php endif; ?>
+            <div class="book-info">
+              <h2><?php echo $book['judul']; ?></h2>
+              <p>
+                <strong>Penulis:</strong>
+                <?php echo $book['penulis']; ?>
+              </p>
+              <p><?php echo $book['deskripsi']; ?></p>
+              <div class="book-actions">
+                <!-- Form untuk memberi rating -->
+                <form
+                  method="POST"
+                  action="perpustakaan.php"
+                  class="rating-form"
+                >
+                  <input
+                    type="hidden"
+                    name="id_buku"
+                    value="<?php echo $book['id']; ?>"
+                  />
+                  <div class="stars">
+                    <input
+                      type="radio"
+                      id="star5_<?php echo $book['id']; ?>"
+                      name="rating"
+                      value="5"
+                    /><label for="star5_<?php echo $book['id']; ?>"
+                      >&#9733;</label
+                    >
+                    <input
+                      type="radio"
+                      id="star4_<?php echo $book['id']; ?>"
+                      name="rating"
+                      value="4"
+                    /><label for="star4_<?php echo $book['id']; ?>"
+                      >&#9733;</label
+                    >
+                    <input
+                      type="radio"
+                      id="star3_<?php echo $book['id']; ?>"
+                      name="rating"
+                      value="3"
+                    /><label for="star3_<?php echo $book['id']; ?>"
+                      >&#9733;</label
+                    >
+                    <input
+                      type="radio"
+                      id="star2_<?php echo $book['id']; ?>"
+                      name="rating"
+                      value="2"
+                    /><label for="star2_<?php echo $book['id']; ?>"
+                      >&#9733;</label
+                    >
+                    <input
+                      type="radio"
+                      id="star1_<?php echo $book['id']; ?>"
+                      name="rating"
+                      value="1"
+                    /><label for="star1_<?php echo $book['id']; ?>"
+                      >&#9733;</label
+                    >
+                  </div>
+                  <textarea
+                    name="review"
+                    placeholder="Tulis komentar Anda..."
+                    required
+                  ></textarea>
+                  <button type="submit" name="action" value="rating">
+                    Berikan Rating
+                  </button>
+                </form>
+              </div>
+              <div>
+                <h3>
+                  Rating:
+                  <?php echo isset($book['rating']) ? $book['rating'] : 'Belum ada rating'; ?>
+                </h3>
+                <h3>Reviews:</h3>
+                <ul>
+                  <?php if (!empty($book['reviews'])): ?>
+                  <?php foreach ($book['reviews'] as $review): ?>
+                  <li>
+                    <strong><?php echo $review['nama']; ?>:</strong>
+                    <?php echo $review['komentar']; ?>
+                  </li>
+                  <?php endforeach; ?>
+                  <?php else: ?>
+                  <li>Belum ada review untuk buku ini.</li>
+                  <?php endif; ?>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="book-actions">
+            <form method="POST" action="perpustakaan.php">
+              <input
+                type="hidden"
+                name="id_buku"
+                value="<?php echo $book['id']; ?>"
+              />
+              <button type="submit" name="action" value="return">
+                Kembalikan Buku
+              </button>
+            </form>
+          </div>
+        </div>
+        <?php endforeach; ?>
+        <!-- PHP Code End -->
+      </div>
+    </div>
+  </body>
+</html>
