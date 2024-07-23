@@ -40,7 +40,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `nama_admin`, `password`, `kode_admin`, `no_tlp`) VALUES
-(1, 'bambang subroto', '1234', 'admin1', '085749051409'),
+(1, 'Nurhasanah', '1234', 'admin1', '08997052243'),
 (3, 'refan rahmat fauzi', '0987', 'admin3', '0980099808');
 
 -- --------------------------------------------------------
