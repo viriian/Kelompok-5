@@ -22,7 +22,7 @@ function signUp($data) {
   $noTlp = htmlspecialchars($data["no_tlp"]);
   $tglDaftar = $data["tgl_pendaftaran"];
   
-    // cek nisn sudah ada / belum 
+    // cek nim sudah ada / belum 
   $nimResult = mysqli_query($connect, "SELECT nim FROM member WHERE nim = $nim");
   if(mysqli_fetch_assoc($nimResult)) {
     echo "<script>
@@ -52,7 +52,7 @@ function signUp($data) {
   $password = password_hash($password, PASSWORD_DEFAULT);
   
   
-  $querySignUp = "INSERT INTO member VALUES($nim, '$kodeMember', '$nama', '$password', '$jk', '$noTlp', '$tglDaftar')";
+  $querySignUp = "INSERT INTO member (nim, kode_member,nama, password, jenis_kelamin, no_tlp, tgl_pendaftaran ) VALUES ('$nim', '$kodeMember', '$nama', '$password', '$jk', '$noTlp', '$tglDaftar')";
   mysqli_query($connect, $querySignUp);
   return mysqli_affected_rows($connect);
   

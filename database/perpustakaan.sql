@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 10, 2023 at 06:48 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.10
+-- Host: 127.0.0.1
+-- Generation Time: Jul 23, 2024 at 02:38 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `nama_admin`, `password`, `kode_admin`, `no_tlp`) VALUES
 (1, 'bambang subroto', '1234', 'admin1', '085749051409'),
-(2, 'esti sitanggang', '4321', 'admin2', '085870283409');
+(3, 'refan rahmat fauzi', '0987', 'admin3', '0980099808');
 
 -- --------------------------------------------------------
 
@@ -116,8 +116,6 @@ CREATE TABLE `member` (
   `nama` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `jenis_kelamin` varchar(20) NOT NULL,
-  `kelas` varchar(5) NOT NULL,
-  `jurusan` varchar(50) NOT NULL,
   `no_tlp` varchar(15) NOT NULL,
   `tgl_pendaftaran` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -126,8 +124,8 @@ CREATE TABLE `member` (
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`nim`, `kode_member`, `nama`, `password`, `jenis_kelamin`, `kelas`, `jurusan`, `no_tlp`, `tgl_pendaftaran`) VALUES
-(202301, 'mem01', 'mangandaralam sakti ', '$2y$10$U53PbfrWXwvMiZ42WzdyfuRLyNKAAxecgPC7ZC..4pxGA8NtlrqBS', 'Laki laki', 'XI', 'Rekayasa Perangkat Lunak', '081383877025', '2023-10-22');
+INSERT INTO `member` (`nim`, `kode_member`, `nama`, `password`, `jenis_kelamin`, `no_tlp`, `tgl_pendaftaran`) VALUES
+(17221019, 'mem05', 'fauzi rahmat', '$2y$10$9GiYDHJnarSVrxbMgIgOm.Fpf7SMZlVMl4WH8jsUaouZq3g0uWPJ2', 'Laki laki', '08970979890', '2008-01-17');
 
 -- --------------------------------------------------------
 
@@ -143,6 +141,13 @@ CREATE TABLE `peminjaman` (
   `tgl_peminjaman` date NOT NULL,
   `tgl_pengembalian` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `peminjaman`
+--
+
+INSERT INTO `peminjaman` (`id_peminjaman`, `id_buku`, `nim`, `id_admin`, `tgl_peminjaman`, `tgl_pengembalian`) VALUES
+(76, 'bis01', 17221019, 1, '2024-07-23', '2024-07-30');
 
 -- --------------------------------------------------------
 
@@ -219,13 +224,13 @@ ALTER TABLE `pengembalian`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `pengembalian`
